@@ -51,7 +51,8 @@ shinyUI(fluidPage(
                   tabPanel("About", about),
                   tabPanel("Table",
                            h3(textOutput('outcome')),
-                           tableOutput("filtered"))
+                           tableOutput("filtered")),
+                  tabPanel('Plot', plotOutput('barplot'))
       )
     )
   )

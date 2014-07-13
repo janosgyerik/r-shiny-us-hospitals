@@ -38,4 +38,16 @@ shinyServer(function(input, output) {
   output$filtered <- renderTable(filtered())
 
   output$outcome <- renderText(input$outcome)
+
+  output$barplot <- renderPlot({
+    df <- filtered()
+    names <- df$'Hospital Name'
+    names <- gsub('MED CENTER', 'M.C.', names)
+    names <- gsub('MEDICAL CENTER', 'M.C.', names)
+    names <- gsub('MEMORIAL HOSPITAL', 'M.H.', names)
+    names <- gsub('HOSPITAL', 'H.', names)
+    par(mfrow=c(1,1), mar=c(2,15,2,2))
+    barplot(rev(df$Value), horiz=T, names.arg=rev(names), las=2)
+    title(main=input$outcome)
+  })
 })
