@@ -13,7 +13,21 @@ You can download the same data set by following these steps:
 2. Click on CSV Flat Files - Revised
 3. Extract the file Outcome of Care Measures.csv from the ZIP file
 
+## Deploying to shinyapps.io
+
+Simply run these commands inside the directory of your Shiny app:
+
+```R
+library(shinyapps)
+deployApp()
+```
+
+It takes a while. When completed, R will open the app's page in your browser.
+
+For more details, [see the docs][2].
+
 ---
 This site is built using [Shiny by RStudio][1]
 
 [1]: http://shiny.rstudio.com/
+[2]: https://github.com/rstudio/shinyapps/blob/master/guide/guide.md
