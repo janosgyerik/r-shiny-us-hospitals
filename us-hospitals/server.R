@@ -36,4 +36,6 @@ shinyServer(function(input, output) {
   })
 
   output$filtered <- renderTable(filtered())
+
+  output$outcome <- renderText(input$outcome)
 })

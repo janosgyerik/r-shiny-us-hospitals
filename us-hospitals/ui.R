@@ -49,7 +49,9 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(type = "tabs", selected = "Table",
                   tabPanel("About", about),
-                  tabPanel("Table", tableOutput("filtered"))
+                  tabPanel("Table",
+                           h3(textOutput('outcome')),
+                           tableOutput("filtered"))
       )
     )
   )
