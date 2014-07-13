@@ -1,8 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
-/shinyapps
+shinyapps
 
 # misc
-/cache
+cache
 tmp
