@@ -37,7 +37,7 @@ shinyUI(fluidPage(
       sliderInput("rank.range",
                   h4("Ranks to include"),
                   min = 1,
-                  max = 50,
+                  max = 100,
                   value = c(1, 20)),
       selectInput("state",
                   h4("State"),
