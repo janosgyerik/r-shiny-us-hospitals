@@ -16,6 +16,7 @@ rank.by.col <- function(df, name) {
   col <- get.colnum(df, name)
   df <- df[order(df[,col], df$'Hospital Name'),]
   df$Rank <- rank(df[,col], ties.method='min')
+  df$Value <- df[,col]
   df
 }
 
@@ -28,7 +29,7 @@ shinyServer(function(input, output) {
     df <- filter.by.state(df, input$state)
     df <- clean.numeric.col(df, input$outcome)
     df <- rank.by.col(df, input$outcome)
-    df <- df[,sapply(c('Rank', input$fields), function(name) get.colnum(df, name))]
+    df <- df[,sapply(c('Hospital Name', 'Rank', 'Value', input$fields), function(name) get.colnum(df, name))]
 
     nmin <- input$rank.range[1]
     nmax <- input$rank.range[2]
