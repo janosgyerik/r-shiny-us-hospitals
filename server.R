@@ -27,14 +27,13 @@ shinyServer(function(input, output) {
     df <- filter.by.state(df, input$state)
     df <- clean.numeric.col(df, input$outcome)
     df <- rank.by.col(df, input$outcome)
-    df <- df[,sapply(input$fields, function(name) get.colnum(df, name))]
+    df <- df[,sapply(c('Rank', input$fields), function(name) get.colnum(df, name))]
 
     nmin <- input$rank.range[1]
     nmax <- input$rank.range[2]
     mid(df, nmin, nmax)
   })
   # todo: reverse order option
-  # todo: show rank#
   # todo: fix rank# for ties
 
   output$filtered <- renderTable(filtered())
