@@ -8,6 +8,7 @@ get.data <- function() {
 }
 
 df <- get.data()
+names(df) <- gsub('\\.', ' ', names(df))
 
 states <- unique(df$State)
 
