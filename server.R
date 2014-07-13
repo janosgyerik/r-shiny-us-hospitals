@@ -18,10 +18,18 @@ clean.numeric.col <- function(df, col) {
 library(shiny)
 
 shinyServer(function(input, output) {
-  nmin <- reactive(input$rank.range[1])
-  nmax <- reactive(input$rank.range[2])
-  filtered <- reactive(filter.by.state(df, input$state))
-  filtered <- reactive(clean.numeric.col(df, input$outcome))
-   
-  output$filtered <- renderTable(mid(filtered(), nmin(), nmax()))
+  filtered <- reactive({
+    df <- filter.by.state(df, input$state)
+    df <- clean.numeric.col(df, input$outcome)
+    df <- df[,sapply(input$fields, function(name) get.colnum(df, name))]
+
+    nmin <- input$rank.range[1]
+    nmax <- input$rank.range[2]
+    mid(df, nmin, nmax)
+  })
+  # todo: order by outcome
+  # todo: reverse order option
+  # todo: show rank#
+
+  output$filtered <- renderTable(filtered())
 })

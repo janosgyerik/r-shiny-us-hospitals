@@ -17,7 +17,15 @@ shinyUI(pageWithSidebar(
                 value = c(1, 20)),
     selectInput("state",
                 "Select state:",
-                choices = states)
+                choices = states),
+    checkboxGroupInput("fields",
+                       label = "Fields",
+                       choices = names(df),
+                       selected = c(
+                         'Hospital Name',
+                         'City',
+                         'State'
+                         ))
   ),
   
   mainPanel(
