@@ -4,13 +4,19 @@
 PATH <- 'data/Outcome of Care Measures.csv'
 
 get.data <- function() {
-  read.csv(PATH, colClasses = "character")
+  df <- read.csv(PATH, colClasses = "character")
+  for (col in length(df):11) {
+    if (sum(grepl('[0-9]', df[,col])) == 0) {
+      df[,col] <- NULL
+    }
+  }
+  names(df) <- gsub('\\.', ' ', names(df))
+  names(df) <- gsub('   ', ' - ', names(df))
+  names(df) <- gsub('30 Day', '30-Day', names(df))
+  df
 }
 
 df <- get.data()
-names(df) <- gsub('\\.', ' ', names(df))
-names(df) <- gsub('   ', ' - ', names(df))
-names(df) <- gsub('30 Day', '30-Day', names(df))
 
 states <- unique(df$State)
 
