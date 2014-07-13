@@ -6,7 +6,6 @@ filter.by.state <- function(df, state) {
 
 clean.numeric.col <- function(df, name) {
   col <- get.colnum(df, name)
-  #df <- subset(df, df[,col] != 'Not Available')
   df <- subset(df, grepl('[0-9]', df[,col]))
   df[,col] <- as.numeric(df[,col])
   df

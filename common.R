@@ -1,8 +1,6 @@
-# Source:
-# https://data.medicare.gov/data/hospital-compare
-# Click on CSV Flat Files -- Revised, download and unzip
 path.source <- 'data/Outcome of Care Measures.csv'
 path.cleaned <- 'cache/hospitals.cleaned.RData'
+# file.remove(path.cleaned)
 
 clean.data <- function() {
   df <- read.csv(path.source, colClasses = "character")
@@ -34,7 +32,6 @@ load.cleaned.data <- function() {
   df
 }
 
-# file.remove(path.cleaned)
 df <- load.cleaned.data()
 
 states <- unique(df$State)
