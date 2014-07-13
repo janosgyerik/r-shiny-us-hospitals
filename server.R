@@ -14,7 +14,7 @@ clean.numeric.col <- function(df, name) {
 rank.by.col <- function(df, name) {
   col <- get.colnum(df, name)
   df <- df[order(df[,col], df$'Hospital Name'),]
-  df$Rank <- 1:nrow(df)
+  df$Rank <- rank(df[,col], ties.method='min')
   df
 }
 
@@ -33,8 +33,6 @@ shinyServer(function(input, output) {
     nmax <- input$rank.range[2]
     mid(df, nmin, nmax)
   })
-  # todo: reverse order option
-  # todo: fix rank# for ties
 
   output$filtered <- renderTable(filtered())
 })
