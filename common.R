@@ -9,6 +9,8 @@ get.data <- function() {
 
 df <- get.data()
 names(df) <- gsub('\\.', ' ', names(df))
+names(df) <- gsub('   ', ' - ', names(df))
+names(df) <- gsub('30 Day', '30-Day', names(df))
 
 states <- unique(df$State)
 
