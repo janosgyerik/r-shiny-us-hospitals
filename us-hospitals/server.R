@@ -52,7 +52,7 @@ shinyServer(function(input, output) {
     names <- gsub('MEMORIAL HOSPITAL', 'M.H.', names)
     names <- gsub('HOSPITAL', 'H.', names)
     par(mfrow=c(1,1), mar=c(2,15,2,2))
-    barplot(rev(df$Value), horiz=T, names.arg=rev(names), las=2)
+    barplot(rev(df$Value), horiz=T, names.arg=rev(names), las=2, col='lightblue')
     title(main=input$outcome)
   })
 })
