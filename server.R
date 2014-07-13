@@ -1,21 +1,23 @@
+source('common.R')
 
-# This is the server logic for a Shiny web application.
-# You can find out more about building applications with Shiny here:
-# 
-# http://www.rstudio.com/shiny/
-#
+filter.by.state <- function(df, state) {
+  subset(df, State == state)
+}
+
+filter.by.col <- function(df, col) {
+  df <- subset(df, df[,col] != 'Not Available')
+  df[,col] <- as.numeric(df[,col])
+  df
+}
+
+### shiny part
 
 library(shiny)
 
 shinyServer(function(input, output) {
+  nmin <- reactive(input$rank.range[1])
+  nmax <- reactive(input$rank.range[2])
+  filtered <- reactive(filter.by.state(df, input$state))
    
-  output$distPlot <- renderPlot({
-     
-    # generate and plot an rnorm distribution with the requested
-    # number of observations
-    dist <- rnorm(input$obs)
-    hist(dist)
-    
-  })
-  
+  output$filtered <- renderTable(mid(filtered(), nmin(), nmax()))
 })
