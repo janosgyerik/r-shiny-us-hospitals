@@ -18,3 +18,6 @@ mid <- function(df, nmin, nmax) {
   tail(head(df, nmax), nmax - nmin + 1)
 }
 
+get.colnum <- function(df, name) {
+  which(colnames(df) == name)
+}

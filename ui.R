@@ -7,6 +7,9 @@ shinyUI(pageWithSidebar(
   headerPanel("US Hospitals"),
   
   sidebarPanel(
+    selectInput("outcome",
+                "Select outcome:",
+                choices = outcomes),
     sliderInput("rank.range", 
                 "Ranks to include:", 
                 min = 1, 
