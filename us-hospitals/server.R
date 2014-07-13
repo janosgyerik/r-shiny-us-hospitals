@@ -19,23 +19,28 @@ rank.by.col <- function(df, name) {
   df
 }
 
+apply.params <- function(state, outcome, rank.range) {
+  df <- filter.by.state(df, state)
+  df <- clean.numeric.col(df, outcome)
+  df <- rank.by.col(df, outcome)
+  nmin <- rank.range[1]
+  nmax <- rank.range[2]
+  mid(df, nmin, nmax)
+}
+
 ### shiny part
 
 library(shiny)
 
 shinyServer(function(input, output) {
   filtered <- reactive({
-    df <- filter.by.state(df, input$state)
-    df <- clean.numeric.col(df, input$outcome)
-    df <- rank.by.col(df, input$outcome)
-    df <- df[,sapply(c('Hospital Name', 'Rank', 'Value', input$fields), function(name) get.colnum(df, name))]
-
-    nmin <- input$rank.range[1]
-    nmax <- input$rank.range[2]
-    mid(df, nmin, nmax)
+    apply.params(input$state, input$outcome, input$rank.range)
   })
 
-  output$filtered <- renderTable(filtered())
+  output$filtered <- renderTable({
+    df <- filtered()
+    df[,sapply(c('Hospital Name', 'Rank', 'Value', input$fields), function(name) get.colnum(df, name))]
+  })
 
   output$outcome <- renderText(input$outcome)
 
