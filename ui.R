@@ -8,18 +8,18 @@ shinyUI(pageWithSidebar(
   
   sidebarPanel(
     selectInput("outcome",
-                "Select outcome:",
+                h4("Rank by"),
                 choices = outcomes),
     sliderInput("rank.range", 
-                "Ranks to include:", 
+                h4("Ranks to include"),
                 min = 1, 
-                max = 20, 
+                max = 50,
                 value = c(1, 20)),
     selectInput("state",
-                "Select state:",
+                h4("State"),
                 choices = states),
     checkboxGroupInput("fields",
-                       label = "Fields",
+                       h4("Fields"),
                        choices = names(df))
   ),
   
