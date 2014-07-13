@@ -23,3 +23,7 @@ mid <- function(df, nmin, nmax) {
 get.colnum <- function(df, name) {
   which(colnames(df) == name)
 }
+
+get.colnum.wrapper <- function(df, nameOrNum) {
+  ifelse(is.numeric(nameOrNum), nameOrNum, get.colnum(nameOrNum))
+}
