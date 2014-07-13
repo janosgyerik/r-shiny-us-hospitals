@@ -1,10 +1,11 @@
 # Source:
 # https://data.medicare.gov/data/hospital-compare
 # Click on CSV Flat Files -- Revised, download and unzip
-PATH <- 'data/Outcome of Care Measures.csv'
+path.source <- 'data/Outcome of Care Measures.csv'
+path.cleaned <- 'cache/hospitals.cleaned.RData'
 
-get.data <- function() {
-  df <- read.csv(PATH, colClasses = "character")
+clean.data <- function() {
+  df <- read.csv(path.source, colClasses = "character")
   for (col in length(df):11) {
     if (sum(grepl('[0-9]', df[,col])) == 0) {
       df[,col] <- NULL
@@ -16,7 +17,25 @@ get.data <- function() {
   df
 }
 
-df <- get.data()
+save.cleaned.data <- function() {
+  df <- clean.data()
+  save(df, file=path.cleaned)
+}
+
+load.cleaned.data <- function() {
+  if (!file.exists(path.cleaned)) {
+    parent <- dirname(path.cleaned)
+    if (!file.exists(parent)) {
+      dir.create(parent)
+    }
+    save.cleaned.data()
+  }
+  load(file=path.cleaned)
+  df
+}
+
+# file.remove(path.cleaned)
+df <- load.cleaned.data()
 
 states <- unique(df$State)
 
