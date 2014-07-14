@@ -12,6 +12,7 @@ clean.data <- function() {
   names(df) <- gsub('\\.', ' ', names(df))
   names(df) <- gsub('   ', ' - ', names(df))
   names(df) <- gsub('30 Day', '30-Day', names(df))
+  names(df) <- gsub('Death  Mortality  Rates', 'Mortality Rates', names(df))
   df
 }
 
