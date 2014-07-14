@@ -1,3 +1,5 @@
+library(ggplot2)
+
 source('common.R')
 
 filter.by.state <- function(df, state) {
