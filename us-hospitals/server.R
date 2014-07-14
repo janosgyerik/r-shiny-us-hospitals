@@ -39,36 +39,18 @@ shinyServer(function(input, output) {
 
   output$filtered <- renderTable({
     df <- filtered()
-    df[,sapply(c('Hospital Name', 'Rank', 'Value', input$fields), function(name) get.colnum(df, name))]
+    df[,sapply(c('Hospital', 'Rank', 'Value', input$fields), function(name) get.colnum(df, name))]
   })
 
   output$outcome <- renderText(input$outcome)
 
   output$barplot <- renderPlot({
     df <- filtered()
-    names <- df$'Hospital Name'
-    names <- gsub('MED CENTER', 'M.C.', names)
-    names <- gsub('MEDICAL CENTER', 'M.C.', names)
-    names <- gsub('MEDICAL CTR', 'M.C.', names)
-    names <- gsub('MED CENTER', 'M.C.', names)
-    names <- gsub('MEMORIAL HOSPITAL', 'M.H.', names)
-    names <- gsub('HOSPITALS CENTER', 'H.C.', names)
-    names <- gsub('HOSPITAL CENTER', 'H.C.', names)
-    names <- gsub('HOSPITALS', 'H.', names)
-    names <- gsub('HOSPITAL', 'H.', names)
-    names <- gsub('HEALTH SYSTEM', 'H.S.', names)
-    names <- gsub(', THE$', '', names)
-    names <- gsub('HEALTHCARE', 'HC.', names)
-    names <- gsub('UNIVERSITY', 'UNIV.', names)
-    names <- gsub('SYSTEMS', 'S.', names)
-    names <- gsub('SYSTEM', 'S.', names)
-    names <- gsub('CENTERS', 'C.', names)
-    names <- gsub('CENTER', 'C.', names)
     #par(mfrow=c(1,1), mar=c(2,15,2,2))
     #barplot(rev(df$Value), horiz=T, names.arg=rev(names), las=2, col='lightblue')
     #title(main=input$outcome)
     df$x = df$Value
-    df$y = names
+    df$y = df$Hospital
     ggplot(df, aes(x=x, y=reorder(y, -x))) +
       geom_point(colour='red') +
       ylab('') + xlab('') +

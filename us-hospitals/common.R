@@ -13,6 +13,26 @@ clean.data <- function() {
   names(df) <- gsub('   ', ' - ', names(df))
   names(df) <- gsub('30 Day', '30-Day', names(df))
   names(df) <- gsub('Death  Mortality  Rates', 'Mortality Rates', names(df))
+
+  hnames <- df$'Hospital Name'
+  hnames <- gsub('MED CENTER', 'M.C.', hnames)
+  hnames <- gsub('MEDICAL CENTER', 'M.C.', hnames)
+  hnames <- gsub('MEDICAL CTR', 'M.C.', hnames)
+  hnames <- gsub('MED CENTER', 'M.C.', hnames)
+  hnames <- gsub('MEMORIAL HOSPITAL', 'M.H.', hnames)
+  hnames <- gsub('HOSPITALS CENTER', 'H.C.', hnames)
+  hnames <- gsub('HOSPITAL CENTER', 'H.C.', hnames)
+  hnames <- gsub('HOSPITALS', 'H.', hnames)
+  hnames <- gsub('HOSPITAL', 'H.', hnames)
+  hnames <- gsub('HEALTH SYSTEM', 'H.S.', hnames)
+  hnames <- gsub(', THE$', '', hnames)
+  hnames <- gsub('HEALTHCARE', 'HC.', hnames)
+  hnames <- gsub('UNIVERSITY', 'UNIV.', hnames)
+  hnames <- gsub('SYSTEMS', 'S.', hnames)
+  hnames <- gsub('SYSTEM', 'S.', hnames)
+  hnames <- gsub('CENTERS', 'C.', hnames)
+  hnames <- gsub('CENTER', 'C.', hnames)
+  df$Hospital <- hnames
   df
 }
 
