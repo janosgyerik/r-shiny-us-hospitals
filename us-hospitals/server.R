@@ -58,7 +58,8 @@ shinyServer(function(input, output) {
     df$y = names
     ggplot(df, aes(x=x, y=reorder(y, -x))) +
       geom_point(colour='red') +
-      ylab('') + xlab(input$outcome) +
+      ylab('') + xlab('') +
+      ggtitle(input$outcome) +
       geom_segment(aes(yend=y), xend=0, colour="grey50") +
       theme_bw()
   })
