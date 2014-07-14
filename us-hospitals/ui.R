@@ -47,7 +47,7 @@ shinyUI(fluidPage(
                          choices = names(df))
     ),
     mainPanel(
-      tabsetPanel(type = "tabs", selected = "Table",
+      tabsetPanel(type = "tabs", selected = "Plot",
                   tabPanel("About", about),
                   tabPanel("Table",
                            h3(textOutput('outcome')),
