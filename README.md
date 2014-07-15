@@ -10,8 +10,8 @@ The hospital data is publicly available from the Data.Medicare.Gov website.
 You can download the same data set by following these steps:
   
 1. Go to https://data.medicare.gov/data/hospital-compare
-2. Click on CSV Flat Files - Revised
-3. Extract the file Outcome of Care Measures.csv from the ZIP file
+2. Click on **CSV Flat Files - Revised**
+3. Extract the file **Outcome of Care Measures.csv** from the ZIP file
 
 ## Deploying to shinyapps.io
 
