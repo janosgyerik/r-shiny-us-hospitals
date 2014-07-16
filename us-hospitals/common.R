@@ -58,6 +58,7 @@ df <- load.cleaned.data()
 states <- unique(df$State)
 
 outcomes <- tail(names(df), -10)
+outcomes <- head(outcomes, -1)  # todo: find a better way to remove Hospital
 
 mid <- function(df, nmin, nmax) {
   tail(head(df, nmax), nmax - nmin + 1)
